@@ -20,7 +20,7 @@ namespace TheWarTimeGame
 
         public static void SomeMethod()
         {
-            double health = 10.0;
+            double health = 20.0;
             Pistol pistol = new Pistol();
             pistol.Attack(ref health);
             Console.WriteLine(health);
