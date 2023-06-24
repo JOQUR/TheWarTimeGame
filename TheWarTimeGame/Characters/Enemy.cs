@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheWarTimeGame.Items
+namespace TheWarTimeGame.Characters
 {
-    public interface ITem
+    public class Enemy : IHuman
     {
-        double Price { get; set; }
+        public double Health { get; set; }
     }
 }

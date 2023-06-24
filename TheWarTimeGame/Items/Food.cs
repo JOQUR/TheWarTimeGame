@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheWarTimeGame.Items
 {
-    public interface ITem
+    public class Food : ITem
     {
-        double Price { get; set; }
+        public double Price { get; set; }
+        public int Hunger { get; set; }
     }
 }
