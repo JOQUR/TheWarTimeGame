@@ -49,3 +49,8 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"JOQUR_TheWarTimeGame" /o:"joqur" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          cd..
+          cd .\TheWarTimeGameUnitTesting\
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"JOQUR_TheWarTimeGame" /o:"joqur" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet test
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
