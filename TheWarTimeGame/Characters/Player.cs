@@ -1,4 +1,5 @@
-﻿using TheWarTimeGame.Items;
+﻿using System.Diagnostics;
+using TheWarTimeGame.Items;
 
 namespace TheWarTimeGame.Characters;
 
@@ -8,15 +9,14 @@ public class Player : IHuman
     public int Hunger { get; private set; }
     public List<ITem> Equipment { get; set; }
     private static Player? _player;
-    private IWeapon _weapon;
+    public IWeapon? Weapon;
 
     private Player()
     {
         this.Health = 10;
         this.Hunger = 10; 
         Equipment = new List<ITem>();
-        {
-        }
+        Weapon = new Knife(KnifePerks.Standard, 2);
     }
 
     public static Player GetPlayerInstance()
@@ -25,7 +25,8 @@ public class Player : IHuman
     }
     public void Attack(ref Enemy enemy)
     {
-        _weapon.Attack(ref enemy);
+        Debug.Assert(Weapon != null, nameof(Weapon) + " != null");
+        Weapon.Attack(ref enemy);
     }
 
     public void Eat(ref Food food)

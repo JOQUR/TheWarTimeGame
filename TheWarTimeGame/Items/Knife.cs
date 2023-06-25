@@ -14,6 +14,11 @@ public class Knife : IWeapon
 
     public void Attack(ref Enemy enemy)
     {
+        if (enemy.Health <= 0)
+        {
+            enemy.Health = 0;
+            return;
+        }
         enemy.Health -= (10 * (int)Perk);
         Bleeding(ref enemy);
     }
@@ -23,6 +28,7 @@ public class Knife : IWeapon
         int i = 10;
         while (i > 0)
         {
+            if(enemy.Health <= 0) enemy.Health = 0;
             enemy.Health -= (0.5);
             Thread.Sleep(100);
             i--;

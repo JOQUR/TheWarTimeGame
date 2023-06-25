@@ -18,8 +18,8 @@ public class Pistol : IWeapon
 
     public void Attack(ref Enemy enemy)
     {
+        if (enemy.Health < 0) enemy.Health = 0;
         enemy.Health -= (6 * (int)Perk);
-        if(enemy.Health < 0) enemy.Health = 0;
         Bleeding(ref enemy);
     }
 
@@ -30,9 +30,10 @@ public class Pistol : IWeapon
         {
             if (enemy.Health <= 0)
             {
+                enemy.Health = 0;
                 return;
             }
-            enemy.Health -= (0.4);
+            enemy.Health -= (0.2);
             Thread.Sleep(100);
             i--;
         }
