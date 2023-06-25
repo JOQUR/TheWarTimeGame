@@ -16,7 +16,6 @@ public class Player : IHuman
         this.Hunger = 10; 
         Equipment = new List<ITem>();
         {
-            new Knife(KnifePerks.Standard, 2);
         }
     }
 
