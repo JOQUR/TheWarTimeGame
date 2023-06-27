@@ -34,4 +34,9 @@ public class Knife : IWeapon
             i--;
         }
     }
+
+    public string ToString()
+    {
+        return "Knife";
+    }
 }

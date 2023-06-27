@@ -1,8 +1,23 @@
 <?xml version="1.0"?>
 <TheWarTime>
-    <Locations>
-        <Home>
-            Knife, Water, Food
-        </Home>
-    </Locations>
-</TheWarTime> 
+	<Locations>
+		<Home>
+			<Items>
+				<Item name="Knife" price="2" id="0"/>
+				<Item name="Water" price="2" id="1"/>
+				<Item name="SoupCan" price="2" id="2"/>
+			</Items>
+		</Home>
+		<Library>
+			<Items>
+				<Item name="Pistol" price="2" id="0"/>
+				<Item name="Water" price="2" id="1"/>
+				<Item name="SoupCan" price="2" id="2"/>
+				<Item name="Ammunition" price="2" id ="3"/>
+				<Item name="Water" price="2" id="4"/>
+				<Item name="SharpenedEdge" price="2" id="5"/>
+			</Items>
+		</Library>
+	</Locations>
+</TheWarTime>
+

@@ -7,13 +7,15 @@ public class Pistol : IWeapon
     public PistolPerks Perk { get; private set; }
     public double Price { get; set; }
 
-    public Pistol(PistolPerks perk)
+    public Pistol(double price, PistolPerks perk)
     {
         this.Perk = perk;
+        this.Price = price;
     }
-    public Pistol()
+    public Pistol(double price)
     {
         this.Perk = PistolPerks.Standard;
+        this.Price = price;
     }
 
     public void Attack(ref Enemy enemy)
@@ -37,5 +39,10 @@ public class Pistol : IWeapon
             Thread.Sleep(100);
             i--;
         }
+    }
+
+    public string ToString()
+    {
+        return "Pistol";
     }
 }

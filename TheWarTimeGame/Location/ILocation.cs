@@ -11,6 +11,6 @@ namespace TheWarTimeGame.Location
     public interface ILocation
     {
         public Player Player { get; protected set; }
-        public List<ITem> Loot { get; protected set; }
+        public List<KeyValuePair<int, ITem>> Loot { get; protected set; }
     }
 }

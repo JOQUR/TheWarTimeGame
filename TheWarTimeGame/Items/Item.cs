@@ -9,5 +9,6 @@ namespace TheWarTimeGame.Items
     public interface ITem
     {
         double Price { get; set; }
+        public string? ToString();
     }
 }

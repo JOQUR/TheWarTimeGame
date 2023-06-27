@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheWarTimeGame.Mechanics;
 
 namespace TheWarTimeGame.Menu
 {
@@ -11,6 +12,7 @@ namespace TheWarTimeGame.Menu
         public void Execute()
         {
             Console.WriteLine("Starting New Game");
+            Game game = new Game();
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheWarTimeGame.Items;
+﻿using TheWarTimeGame.Items;
 
 namespace TheWarTimeGame.Characters
 {
@@ -14,7 +9,6 @@ namespace TheWarTimeGame.Characters
 
         public Enemy()
         {
-            _pistol = new Pistol();
         }
 
         public void Attack(ref Enemy enemy)
