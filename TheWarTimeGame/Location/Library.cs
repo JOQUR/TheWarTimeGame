@@ -15,6 +15,7 @@ namespace TheWarTimeGame.Location
 
         public Library()
         {
+            Player = Player.GetPlayerInstance();
             Loot = new List<KeyValuePair<int, ITem>>();
         }
     }

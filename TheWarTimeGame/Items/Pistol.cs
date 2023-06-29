@@ -41,7 +41,7 @@ public class Pistol : IWeapon
         }
     }
 
-    public string ToString()
+    public override string ToString()
     {
         return "Pistol";
     }

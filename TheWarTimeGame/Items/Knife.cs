@@ -35,7 +35,7 @@ public class Knife : IWeapon
         }
     }
 
-    public string ToString()
+    public override string ToString()
     {
         return "Knife";
     }

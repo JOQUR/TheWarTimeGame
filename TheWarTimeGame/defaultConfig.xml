@@ -18,6 +18,22 @@
 				<Item name="SharpenedEdge" price="2" id="5"/>
 			</Items>
 		</Library>
+		<Church>
+			<Items>
+				<Item name="Water" price="2" id="0"/>
+				<Item name="SoupCan" price="2" id="1"/>
+				<Item name="Ammunition" price="2" id ="2"/>
+				<Item name="Water" price="2" id="3"/>
+				<Item name="SharpenedEdge" price="2" id="4"/>
+				<Item name="SoupCan" price="2" id="5"/>
+				
+			</Items>
+		</Church>
 	</Locations>
+	<Vendor>
+		<WeaponVendor>
+			<Item name="Knife"/>
+		</WeaponVendor>
+	</Vendor>
 </TheWarTime>
 
