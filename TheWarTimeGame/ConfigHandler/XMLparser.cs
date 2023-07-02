@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using TheWarTimeGame.Characters;
 using TheWarTimeGame.Items;
 using TheWarTimeGame.Location;
 
@@ -6,12 +7,23 @@ namespace TheWarTimeGame.ConfigHandler
 {
     public class XMLparser
     {
-        XDocument xmlDoc = XDocument.Load(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, @"./defaultConfig.xml"));
+        public static int id = 0;
+        private XDocument xmlDoc = XDocument.Load(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, @"./defaultConfig.xml"));
+        private static XDocument xmlScript = XDocument.Load(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, @"./Script.xml"));
         public XMLparser(ILocation x)
         {
-            
+            getLocationData(x);
+            getEnemies(x);
+        }
 
-            foreach (XElement element in xmlDoc.Root.Element("Locations").Element("Home").Elements("Items").Elements("Item"))
+        public XMLparser()
+        {
+
+        }
+
+        private void getLocationData(ILocation x)
+        {
+            foreach (XElement element in xmlDoc.Root.Element("Locations").Element(x.ToString()).Elements("Items").Elements("Item"))
             {
                 double price;
                 if ((double)element.Attribute("price") == null)
@@ -20,36 +32,33 @@ namespace TheWarTimeGame.ConfigHandler
                 }
 
                 price = (double)element.Attribute("price");
-                ITem item = ItemFactory.CreateItem((string)element.Attribute("name"), price);
-                x.Loot.Add(new KeyValuePair<int, ITem>((int)element.Attribute("id"), item));
-
+                ITem item = ItemFactory.CreateItem(itemType: (string)element.Attribute("name"), price: price);
+                x.Loot.Add(new KeyValuePair<int, ITem>((int)id++, item));
             }
-
-        }
-    }
-
-    public class ItemFactory
-    {
-        protected ItemFactory()
-        {
-
         }
 
-        public static ITem CreateItem(string itemType, double price)
+        private void getEnemies(ILocation x)
         {
-            switch (itemType.ToLower())
+            if(x.GetType() == typeof(Home))
             {
-                case "knife":
-                    return new Knife(0, price);
-                case "pistol":
-                    return new Pistol(price, PistolPerks.BetterAmmo);
-                case "soupcan":
-                    return new SoupCan(price);
-                case "water":
-                    return new Water(price);
-                default:
-                    return new Water(price);
+                return;
             }
+
+            foreach (XElement element in xmlDoc.Root.Element("Locations").Element(x.ToString()).Elements("Enemies").Elements("Enemy"))
+            {
+                int hp = (int)element.Attribute("hp");
+                Enemy enemy = new Enemy();
+                enemy.Health = hp;
+                x.Enemies.Add(new KeyValuePair<int, IHuman>((int)id++, enemy));
+            }
+        }
+
+        public static string ReadScript(string _node)
+        {
+            string script;
+            XElement element = xmlScript.Root.Element("Scripts").Element(_node);
+            script = (string)element.Attribute("msg");
+            return script;
         }
     }
 }

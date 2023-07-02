@@ -13,10 +13,21 @@ namespace TheWarTimeGame.Location
 
         public Player Player { get; set; }
         public List<KeyValuePair<int, ITem>> Loot { get; set; }
+        public List<KeyValuePair<int, IHuman>> Enemies { get; set; }
         public Home()
         {
             Player = Player.GetPlayerInstance();
             Loot = new List<KeyValuePair<int, ITem>>();
+        }
+
+        public override string ToString()
+        {
+            return "Home";
+        }
+
+        public ILocation GetClone()
+        {
+            return (Home)this.MemberwiseClone();
         }
     }
 }

@@ -1,50 +1,69 @@
-﻿using TheWarTimeGame.ConfigHandler;
-using TheWarTimeGame.Items;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TheWarTimeGame.Characters;
+using TheWarTimeGame.ConfigHandler;
 using TheWarTimeGame.Location;
 
 namespace TheWarTimeGame.Mechanics
 {
-    internal class Game
+    public class Game
     {
-        readonly private Home _home;
-        readonly private Library _library;
-        readonly private Church _church;
-        public Game()
-        {
-            GetConfig(ref _home);
-            GetConfig(ref _library);
-            GetConfig(ref _church);
-            foreach (var kvp in _home.Loot.Select(kvp => kvp.Value))
-            {
-                Console.WriteLine("Name = {0}\nPrice = {1}", kvp.ToString(), kvp.Price);
-            }
 
-            Console.WriteLine("=============");
-            foreach (var kvp in _library.Loot.Select(kvp => kvp.Value))
+        private Home _home;
+        private Library _library;
+        private Church _church;
+        private Player _player;
+        private InputHandler _inputHandler;
+        private IExplore ExploreChurch, ExploreLib, StayHome;
+        private int _days;
+        public Game(Home home, Library library, Church church)
+        {
+            GameInit(home, library, church);
+            do
             {
-                Console.WriteLine("Name = {0}\nPrice = {1}", kvp.ToString(), kvp.Price);
-            }
+                InformUser();
+                Explorer.Invoke(Action(_inputHandler.GetDecision()));
+                Thread.Sleep(1000);
+                _days++;
+            } while (_days < 30);
+        }
 
-            Console.WriteLine("=============");
-            foreach (var kvp in _church.Loot.Select(kvp => kvp.Value))
+        public void GameInit(Home home, Library library, Church church)
+        {
+            _days = 0;
+            _home = (Home)home.GetClone();
+            _library = (Library)library.GetClone();
+            _church = (Church)church.GetClone();
+            _player = Player.GetPlayerInstance();
+            _inputHandler = new InputHandler();
+            ExploreChurch = new ExploreChurch();
+            ExploreLib = new ExploreLibrary();
+            StayHome = new StayHome();
+        }
+
+        private void InformUser()
+        {
+            Console.Clear();
+            ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("NewGame"), ConsoleColor.Magenta);
+            ConsoleOutput.ChangeConsoleColor(MapParser.GetMap(), ConsoleColor.Gray);
+        }
+
+        private IExplore Action(int decision)
+        {
+            Console.Clear();
+            switch (decision)
             {
-                Console.WriteLine("Name = {0}\nPrice = {1}", kvp.ToString(), kvp.Price);
+                default:
+                case 1:
+                    return this.StayHome;
+                case 2:
+                    return this.ExploreLib;
+                case 3:
+                    return this.ExploreChurch;
             }
-        }
-        public void GetConfig(ref Home home)
-        {
-            home = new Home();
-            XMLparser parser = new XMLparser(home);
-        }
-        public void GetConfig(ref Library library)
-        {
-            library = new Library();
-            XMLparser parser = new XMLparser(library);
-        }
-        public void GetConfig(ref Church church)
-        {
-            church = new Church();
-            XMLparser parser = new XMLparser(church);
         }
     }
 }

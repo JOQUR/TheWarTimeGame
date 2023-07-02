@@ -6,6 +6,7 @@ public class Knife : IWeapon
 {
     public KnifePerks Perk { get; private set; }
     public double Price { get; set; }
+    public int ID { get; set; }
     public Knife(KnifePerks perk, double price)
     {
         Perk = perk;

@@ -9,6 +9,7 @@ namespace TheWarTimeGame.Characters
 
         public Enemy()
         {
+            _pistol = new Pistol(0, PistolPerks.Standard);
         }
 
         public void Attack(ref Enemy enemy)

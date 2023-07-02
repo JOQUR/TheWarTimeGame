@@ -9,7 +9,7 @@ namespace TheWarTimeGame.Items
 {
     public class Water : Food
     {
-
+        public int ID { get; set; }
         public Water(double price) 
         {
             this.Price = price;

@@ -7,6 +7,7 @@ using TheWarTimeGame.Characters;
 using TheWarTimeGame.ConfigHandler;
 using TheWarTimeGame.Items;
 using TheWarTimeGame.Menu;
+using TheWarTimeGame.Location;
 
 namespace TheWarTimeGame
 {

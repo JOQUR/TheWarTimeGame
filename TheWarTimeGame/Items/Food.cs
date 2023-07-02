@@ -11,6 +11,7 @@ namespace TheWarTimeGame.Items
     {
         public double Price { get; set; }
         public int Hunger { get; set; }
+        public int ID { get; set; }
 
         public virtual void Use(Player owner, ref int value)
         {

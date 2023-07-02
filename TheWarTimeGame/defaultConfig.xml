@@ -15,8 +15,11 @@
 				<Item name="SoupCan" price="2" id="2"/>
 				<Item name="Ammunition" price="2" id ="3"/>
 				<Item name="Water" price="2" id="4"/>
-				<Item name="SharpenedEdge" price="2" id="5"/>
 			</Items>
+			<Enemies>
+				<Enemy hp="5"/>
+				<Enemy hp="7"/>
+			</Enemies>
 		</Library>
 		<Church>
 			<Items>
@@ -24,15 +27,18 @@
 				<Item name="SoupCan" price="2" id="1"/>
 				<Item name="Ammunition" price="2" id ="2"/>
 				<Item name="Water" price="2" id="3"/>
-				<Item name="SharpenedEdge" price="2" id="4"/>
-				<Item name="SoupCan" price="2" id="5"/>
-				
+				<Item name="SoupCan" price="2" id="4"/>
 			</Items>
+			<Enemies>
+				<Enemy hp="8"/>
+				<Enemy hp="10"/>
+				<Enemy hp="9"/>
+			</Enemies>
 		</Church>
 	</Locations>
 	<Vendor>
 		<WeaponVendor>
-			<Item name="Knife"/>
+			<Item name="Knife" id="0"/>
 		</WeaponVendor>
 	</Vendor>
 </TheWarTime>

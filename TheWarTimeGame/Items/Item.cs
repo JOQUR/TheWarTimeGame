@@ -10,5 +10,6 @@ namespace TheWarTimeGame.Items
     {
         double Price { get; set; }
         public string? ToString();
+        public int ID { get; set; }
     }
 }

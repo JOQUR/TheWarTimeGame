@@ -11,6 +11,9 @@ namespace TheWarTimeGame.Location
     public interface ILocation
     {
         public Player Player { get; protected set; }
-        public List<KeyValuePair<int, ITem>> Loot { get; protected set; }
+        public List<KeyValuePair<int, ITem>> Loot { get; set; }
+        public List<KeyValuePair<int, IHuman>> Enemies { get; set; }
+
+        public ILocation GetClone();
     }
 }

@@ -6,6 +6,7 @@ public class Pistol : IWeapon
 {
     public PistolPerks Perk { get; private set; }
     public double Price { get; set; }
+    public int ID { get; set; }
 
     public Pistol(double price, PistolPerks perk)
     {
@@ -17,7 +18,6 @@ public class Pistol : IWeapon
         this.Perk = PistolPerks.Standard;
         this.Price = price;
     }
-
     public void Attack(ref Enemy enemy)
     {
         if (enemy.Health < 0) enemy.Health = 0;

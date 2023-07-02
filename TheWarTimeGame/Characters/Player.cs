@@ -6,7 +6,7 @@ namespace TheWarTimeGame.Characters;
 public class Player : IHuman
 {
     public double Health { get; set; }
-    public int Hunger { get; private set; }
+    public int Hunger { get; set; }
     public List<ITem> Equipment { get; set; }
     private static Player? _player;
     public IWeapon? Weapon;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TheWarTimeGame.ConfigHandler;
 
 namespace TheWarTimeGame.Menu;
 
@@ -22,6 +23,7 @@ public class MainMenuHandler
 
     public void HandleDecision()
     {
+        ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("Invitation"), ConsoleColor.DarkBlue);
         int decision = GetDecision();
         switch (decision)
         {
