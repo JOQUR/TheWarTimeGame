@@ -1,0 +1,19 @@
+{
+  "ServerUri": "https://sonarcloud.io/",
+  "Organization": {
+    "Key": "joqur",
+    "Name": "Paweł Kierzek"
+  },
+  "ProjectKey": "JOQUR_TheWarTimeGame",
+  "ProjectName": "TheWarTimeGame",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AYjs6G9BvTFL-Tlvn241",
+      "ProfileTimestamp": "2023-06-26T14:10:13Z"
+    },
+    "Secrets": {
+      "ProfileKey": "AYjs6G9BvTFL-Tlvn24c",
+      "ProfileTimestamp": "2023-01-25T09:40:14Z"
+    }
+  }
+}

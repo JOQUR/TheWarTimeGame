@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheWarTimeGame.Characters;
+﻿using TheWarTimeGame.Characters;
 using TheWarTimeGame.ConfigHandler;
 using TheWarTimeGame.Location;
 
@@ -26,8 +21,11 @@ namespace TheWarTimeGame.Mechanics
             {
                 InformUser();
                 Explorer.Invoke(Action(_inputHandler.GetDecision()));
-                Thread.Sleep(1000);
                 _days++;
+                if(Player.GetPlayerInstance().Health <= 0 || Player.GetPlayerInstance().Hunger <= 0)
+                {
+                    Console.WriteLine("Game Over!");
+                }
             } while (_days < 30);
         }
 
@@ -41,7 +39,7 @@ namespace TheWarTimeGame.Mechanics
             _inputHandler = new InputHandler();
             ExploreChurch = new ExploreChurch();
             ExploreLib = new ExploreLibrary();
-            StayHome = new StayHome();
+            StayHome = new StayHome(_home);
         }
 
         private void InformUser()
@@ -58,11 +56,20 @@ namespace TheWarTimeGame.Mechanics
             {
                 default:
                 case 1:
+                {
+                    ConsoleOutput.ChangeConsoleColor("You decided to stay home!", ConsoleColor.Yellow, true);
                     return this.StayHome;
+                } 
                 case 2:
+                {
+                    ConsoleOutput.ChangeConsoleColor("You decided to explore library!", ConsoleColor.Yellow, true);
                     return this.ExploreLib;
+                }
                 case 3:
+                {
+                    ConsoleOutput.ChangeConsoleColor("You decided to explore church!", ConsoleColor.Yellow, true);
                     return this.ExploreChurch;
+                }
             }
         }
     }

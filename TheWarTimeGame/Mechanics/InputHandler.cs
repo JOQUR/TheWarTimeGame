@@ -10,8 +10,16 @@ namespace TheWarTimeGame.Mechanics
     {
         public int GetDecision()
         {
+            int input = 0;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            int input = Int32.Parse(Console.ReadLine());
+            try
+            {
+                input = Int32.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                input = 0;
+            }
             Console.ForegroundColor = ConsoleColor.White;
             return input;
         }

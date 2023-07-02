@@ -15,5 +15,13 @@ namespace TheWarTimeGame.ConfigHandler
             Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.White;
         }
+        public static void ChangeConsoleColor(string text, ConsoleColor color, bool clearTerminal)
+        {
+            if(clearTerminal)
+                Console.Clear();
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
     }
 }

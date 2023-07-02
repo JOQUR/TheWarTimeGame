@@ -7,21 +7,24 @@ using TheWarTimeGame.Characters;
 
 namespace TheWarTimeGame.Items
 {
-    public class SoupCan : Food
+    public class SoupCan : IFood
     {
         public int ID { get; set; }
+        public double Price { get; set; }
+        public int Hunger { get; set; }
+
         public SoupCan(double price)
         {
             this.Price = price;
         }
-        public override void Use(Player owner, ref int value)
+        public void Use()
         {
-            foreach(var i in owner.Equipment)
+            foreach(var i in Player.GetPlayerInstance().Equipment)
             {
                 if(i.GetType() == typeof(SoupCan))
                 {
-                    owner.Equipment.Remove(i);
-                    value += 4;
+                    Player.GetPlayerInstance().Equipment.Remove(i);
+                    Player.GetPlayerInstance().Hunger += 4;
                 }
             }
         }

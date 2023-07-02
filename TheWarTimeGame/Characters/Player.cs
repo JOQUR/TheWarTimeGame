@@ -29,7 +29,7 @@ public class Player : IHuman
         Weapon.Attack(ref enemy);
     }
 
-    public void Eat(ref Food food)
+    public void Eat(IFood food)
     {
         if (_player!.Equipment.Contains((food)))
         {

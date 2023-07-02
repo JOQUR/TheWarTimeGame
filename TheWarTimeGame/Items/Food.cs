@@ -7,15 +7,12 @@ using TheWarTimeGame.Characters;
 
 namespace TheWarTimeGame.Items
 {
-    public class Food : ITem
+    public interface IFood : ITem
     {
         public double Price { get; set; }
         public int Hunger { get; set; }
         public int ID { get; set; }
 
-        public virtual void Use(Player owner, ref int value)
-        {
-            throw new NotImplementedException("Cannot use it here");
-        }
+        public abstract void Use();
     }
 }

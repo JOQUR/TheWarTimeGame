@@ -41,6 +41,11 @@ public class Pistol : IWeapon
         }
     }
 
+    public void Use()
+    {
+        Console.WriteLine("You cannot use it like that!");
+    }
+
     public override string ToString()
     {
         return "Pistol";

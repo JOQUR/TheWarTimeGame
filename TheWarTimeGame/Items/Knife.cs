@@ -40,4 +40,9 @@ public class Knife : IWeapon
     {
         return "Knife";
     }
+
+    public void Use()
+    {
+        Console.WriteLine("You cannot use it like that!");
+    }
 }
