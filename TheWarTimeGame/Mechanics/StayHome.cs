@@ -39,23 +39,26 @@ namespace TheWarTimeGame.Mechanics
         private void useItem(List<KeyValuePair<int, ITem>> list)
         {
             InputHandler handler = new InputHandler();
-            ConsoleOutput.ChangeConsoleColor("Would you mind to use any item?", ConsoleColor.Cyan);
-            bool x = Convert.ToBoolean(handler.GetDecision());
-            if (!x)
+            ConsoleOutput.ChangeConsoleColor("Would you mind to use any item? (y/n)", ConsoleColor.Cyan);
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.N)
             {
                 return;
+            }
+            else
+            {
+                ;
             }
             for(int i = 0; i < list.Count; i++)
             {
                 Console.WriteLine("{0}) {1}", (i + 1), list[i].Value);
             }
             ConsoleOutput.ChangeConsoleColor("Which one?", ConsoleColor.Cyan);
-            again:
             int index = handler.GetDecision();
-            if(index > 3 || index < 1)
+            while(!(index <= 3 && index >= 1))
             {
-                ConsoleOutput.ChangeConsoleColor("Wrong Input", ConsoleColor.Red);
-                goto again;
+                ConsoleOutput.ChangeConsoleColor("Wrong INPUT!", ConsoleColor.Red);
+                index = handler.GetDecision();
             }
             list[index - 1].Value.Use();
             if (list[index - 1].Value.GetType() == typeof(Knife) || list[index - 1].Value.GetType() == typeof(Pistol))

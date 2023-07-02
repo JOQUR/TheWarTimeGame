@@ -14,17 +14,21 @@ namespace TheWarTimeGame.Mechanics
         private InputHandler _inputHandler;
         private IExplore ExploreChurch, ExploreLib, StayHome;
         private int _days;
+        private double _hp;
+        private int _hunger;
         public Game(Home home, Library library, Church church)
         {
             GameInit(home, library, church);
             do
             {
+                _hp = Player.GetPlayerInstance().Health;
+                _hunger = Player.GetPlayerInstance().Hunger;
                 InformUser();
                 Explorer.Invoke(Action(_inputHandler.GetDecision()));
                 _days++;
-                if(Player.GetPlayerInstance().Health <= 0 || Player.GetPlayerInstance().Hunger <= 0)
+                if(_hp <= 0 || _hunger <= 0)
                 {
-                    Console.WriteLine("Game Over!");
+                    Environment.Exit(0);
                 }
             } while (_days < 30);
         }
@@ -46,6 +50,8 @@ namespace TheWarTimeGame.Mechanics
         {
             Console.Clear();
             ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("NewGame"), ConsoleColor.Magenta);
+            ConsoleOutput.ChangeConsoleColor("HP: " + _hp, ConsoleColor.DarkRed);
+            ConsoleOutput.ChangeConsoleColor("Hunger: " + _hunger, ConsoleColor.DarkGreen);
             ConsoleOutput.ChangeConsoleColor(MapParser.GetMap(), ConsoleColor.Gray);
         }
 

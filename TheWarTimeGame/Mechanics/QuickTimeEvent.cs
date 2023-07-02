@@ -20,9 +20,9 @@ namespace TheWarTimeGame.Mechanics
             }
             Player.GetPlayerInstance().Hunger++;
             Thread.Sleep(500);
-            ConsoleOutput.ChangeConsoleColor("You did it!", ConsoleColor.Green);
+            ConsoleOutput.ChangeConsoleColor("\nYou did it!", ConsoleColor.Green);
         }
 
-        public static void clickButtons(ref string input) => input = Console.ReadLine();
+        public static void clickButtons(ref string input) => input = Console.ReadKey().ToString()!;
     }
 }
