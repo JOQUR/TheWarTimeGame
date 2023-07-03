@@ -42,17 +42,17 @@ namespace TheWarTimeGame.Mechanics
             _player = Player.GetPlayerInstance();
             _inputHandler = new InputHandler();
             ExploreChurch = new ExploreChurch();
-            ExploreLib = new ExploreLibrary();
+            ExploreLib = new ExploreLibrary((Library)library.GetClone());
             StayHome = new StayHome(_home);
         }
 
         private void InformUser()
         {
             Console.Clear();
-            ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("NewGame"), ConsoleColor.Magenta);
-            ConsoleOutput.ChangeConsoleColor("HP: " + _hp, ConsoleColor.DarkRed);
-            ConsoleOutput.ChangeConsoleColor("Hunger: " + _hunger, ConsoleColor.DarkGreen);
-            ConsoleOutput.ChangeConsoleColor(MapParser.GetMap(), ConsoleColor.Gray);
+            ConsoleManagment.Print(XMLparser.ReadScript("Instruction"), ConsoleColor.Magenta);
+            ConsoleManagment.GetStats(Console.ReadKey());
+            ConsoleManagment.Print(XMLparser.ReadScript("NewGame"), ConsoleColor.White);
+            ConsoleManagment.Print(MapParser.GetMap(), ConsoleColor.Gray);
         }
 
         private IExplore Action(int decision)
@@ -63,17 +63,17 @@ namespace TheWarTimeGame.Mechanics
                 default:
                 case 1:
                 {
-                    ConsoleOutput.ChangeConsoleColor("You decided to stay home!", ConsoleColor.Yellow, true);
+                    ConsoleManagment.Print("You decided to stay home!", ConsoleColor.Yellow, true);
                     return this.StayHome;
                 } 
                 case 2:
                 {
-                    ConsoleOutput.ChangeConsoleColor("You decided to explore library!", ConsoleColor.Yellow, true);
+                    ConsoleManagment.Print("You decided to explore library!", ConsoleColor.Yellow, true);
                     return this.ExploreLib;
                 }
                 case 3:
                 {
-                    ConsoleOutput.ChangeConsoleColor("You decided to explore church!", ConsoleColor.Yellow, true);
+                    ConsoleManagment.Print("You decided to explore church!", ConsoleColor.Yellow, true);
                     return this.ExploreChurch;
                 }
             }

@@ -17,47 +17,46 @@ namespace TheWarTimeGame.Mechanics
         public StayHome(Home home)
         {
             _home = (Home)home.GetClone();
+            
         }
 
         public void Explore()
         {
-            ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("QuickEvent"), ConsoleColor.Green);
-            Console.ReadLine();
-            QuickTimeEvent.HomeEvent();
-            ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("StayHome"), ConsoleColor.DarkYellow);
-            if((Player.GetPlayerInstance().Hunger--) < 0)
+            ConsoleManagment.Print(XMLparser.ReadScript("StayHome"), ConsoleColor.DarkYellow);
+            Player.GetPlayerInstance().Health++;
+            if ((Player.GetPlayerInstance().Hunger--) < 0 || Player.GetPlayerInstance().Health <= 0)
             {
-                Console.WriteLine("YOU LOSE");
+                Console.WriteLine("YOU LOSE!");
             }
-            if ((Player.GetPlayerInstance().Health++) > 10)
+            if ((Player.GetPlayerInstance().Health) > 10)
             {
                 Player.GetPlayerInstance().Health = 10;
             }
             useItem(_home.Loot);
+
+            ConsoleManagment.Print(XMLparser.ReadScript("QuickEvent"), ConsoleColor.Green);
+            Console.ReadLine();
+
+            SpecialEvent();
         }
 
         private void useItem(List<KeyValuePair<int, ITem>> list)
         {
             InputHandler handler = new InputHandler();
-            ConsoleOutput.ChangeConsoleColor("Would you mind to use any item? (y/n)", ConsoleColor.Cyan);
+            ConsoleManagment.Print("Would you mind to use any item? (y/n)", ConsoleColor.Cyan);
             ConsoleKeyInfo key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.N)
-            {
+            if (!readKey(key))
                 return;
-            }
-            else
-            {
-                ;
-            }
+
             for(int i = 0; i < list.Count; i++)
             {
                 Console.WriteLine("{0}) {1}", (i + 1), list[i].Value);
             }
-            ConsoleOutput.ChangeConsoleColor("Which one?", ConsoleColor.Cyan);
+            ConsoleManagment.Print("Which one?", ConsoleColor.Cyan);
             int index = handler.GetDecision();
             while(!(index <= 3 && index >= 1))
             {
-                ConsoleOutput.ChangeConsoleColor("Wrong INPUT!", ConsoleColor.Red);
+                ConsoleManagment.Print("Wrong INPUT!", ConsoleColor.Red);
                 index = handler.GetDecision();
             }
             list[index - 1].Value.Use();
@@ -67,6 +66,27 @@ namespace TheWarTimeGame.Mechanics
             }
 
             list.RemoveAt(index - 1);
+        }
+
+        private void SpecialEvent()
+        {
+            QuickTimeEvent quickTimeEvent = new QuickTimeEvent();
+            quickTimeEvent.HomeEvent();
+            Console.ReadLine();
+        }
+        private bool readKey(ConsoleKeyInfo key)
+        {
+            bool ret = false;
+            if(key.Key == ConsoleKey.N)
+            {
+                ret = false;
+            }
+            else if(key.Key == ConsoleKey.Y)
+            {
+                ret = true;
+            }
+
+            return ret;
         }
     }
 }

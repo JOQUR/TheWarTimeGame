@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <TheWarTime>
 	<Scripts>
-		<Invitation msg="Welcome to the War Time game&#xA; New Game - type 1&#xA; Save Game - type 2&#xA; Quit - typ 3"/>
+		<Instruction msg="Instruction:&#xA;H: see HP&#xA;J: see Hunger&#xA;E: see Equipment&#xA;S: Save Game"/>
+		<Invitation msg="Welcome to the War Time game&#xA; New Game - type 1&#xA; Quit - typ 3"/>
 		<NewGame msg="You found yourself in a big troubles.&#xA;You are alone in your destroyed house, you need to do something to survive first days of war to be saved.&#xA;It's getting dark!&#xA;Choose which place you want to explore tonight!&#xA;Choose right number to explore location"/>
 		<StayHome msg="You decided to rest, that's good... &#xA;You regenerate your HP, but you get hungry"/>
 		<QuickEvent msg="You need to react fast,&#xA; if you press any key you will hunt animal outside and get food,&#xA; if you fail you lose HP,&#xA; if you pass, you get +1 hunger&#xA;Press Enter to start event..."/>

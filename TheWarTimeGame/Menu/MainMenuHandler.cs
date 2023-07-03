@@ -23,7 +23,7 @@ public class MainMenuHandler
 
     public void HandleDecision()
     {
-        ConsoleOutput.ChangeConsoleColor(XMLparser.ReadScript("Invitation"), ConsoleColor.DarkBlue);
+        ConsoleManagment.Print(XMLparser.ReadScript("Invitation"), ConsoleColor.DarkBlue);
         int decision = GetDecision();
         switch (decision)
         {
