@@ -20,27 +20,23 @@ namespace TheWarTimeGame.Mechanics
             
         }
 
-        public void Explore()
+        public void Explore(IWeapon weapon)
         {
             ConsoleManagment.Print(XMLparser.ReadScript("StayHome"), ConsoleColor.DarkYellow);
             Player.GetPlayerInstance().Health++;
-            if ((Player.GetPlayerInstance().Hunger--) < 0 || Player.GetPlayerInstance().Health <= 0)
-            {
-                Console.WriteLine("YOU LOSE!");
-            }
             if ((Player.GetPlayerInstance().Health) > 10)
             {
                 Player.GetPlayerInstance().Health = 10;
             }
-            useItem(_home.Loot);
-
+            useItem(Player.GetPlayerInstance().Equipment);
+            Player.GetPlayerInstance().Hunger -= 1;
             ConsoleManagment.Print(XMLparser.ReadScript("QuickEvent"), ConsoleColor.Green);
             Console.ReadLine();
 
             SpecialEvent();
         }
 
-        private void useItem(List<KeyValuePair<int, ITem>> list)
+        private void useItem(List<ITem> list)
         {
             InputHandler handler = new InputHandler();
             ConsoleManagment.Print("Would you mind to use any item? (y/n)", ConsoleColor.Cyan);
@@ -50,22 +46,21 @@ namespace TheWarTimeGame.Mechanics
 
             for(int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine("{0}) {1}", (i + 1), list[i].Value);
+                Console.WriteLine("{0}) {1}", (i + 1), list[i].ToString());
             }
             ConsoleManagment.Print("Which one?", ConsoleColor.Cyan);
             int index = handler.GetDecision();
-            while(!(index <= 3 && index >= 1))
+            while(!(index <= (Player.GetPlayerInstance().Equipment.Count) && index >= 1))
             {
                 ConsoleManagment.Print("Wrong INPUT!", ConsoleColor.Red);
                 index = handler.GetDecision();
             }
-            list[index - 1].Value.Use();
-            if (list[index - 1].Value.GetType() == typeof(Knife) || list[index - 1].Value.GetType() == typeof(Pistol))
+            if (list[index - 1].GetType() == typeof(Knife) || list[index - 1].GetType() == typeof(Pistol))
             {
                 return;
             }
-
-            list.RemoveAt(index - 1);
+            double x = 1.0; // Unused but necessary
+            list[index - 1].Use(ref x);
         }
 
         private void SpecialEvent()

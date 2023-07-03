@@ -10,9 +10,9 @@ namespace TheWarTimeGame.Items
     public interface IFood : ITem
     {
         public double Price { get; set; }
-        public int Hunger { get; set; }
+        public double Hunger { get; set; }
         public int ID { get; set; }
 
-        public abstract void Use();
+        public abstract void Use(ref double value);
     }
 }

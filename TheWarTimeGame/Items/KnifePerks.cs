@@ -2,7 +2,7 @@
 
 public enum KnifePerks
 {
-    Standard,
+    Standard = 1,
     SharpenedEdge,
     PoisonedEdge
 }

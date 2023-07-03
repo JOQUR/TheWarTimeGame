@@ -4,6 +4,6 @@ namespace TheWarTimeGame.Items;
 
 public interface IWeapon : ITem
 {
-    void Attack(ref Enemy enemy); 
-    void Bleeding(ref Enemy enemy);
+    void Attack(ref double health); 
+    void Bleeding(ref double health);
 }

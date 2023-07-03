@@ -6,7 +6,7 @@ namespace TheWarTimeGame.Characters;
 public class Player : IHuman
 {
     public double Health { get; set; }
-    public int Hunger { get; set; }
+    public double Hunger { get; set; }
     public List<ITem> Equipment { get; set; }
     private static Player? _player;
     public IWeapon? Weapon;
@@ -23,10 +23,10 @@ public class Player : IHuman
     {
         return _player ??= new Player();
     }
-    public void Attack(ref Enemy enemy)
+    public void Attack(ref double health)
     {
         Debug.Assert(Weapon != null, nameof(Weapon) + " != null");
-        Weapon.Attack(ref enemy);
+        Weapon.Attack(ref health);
     }
 
     public void Eat(IFood food)

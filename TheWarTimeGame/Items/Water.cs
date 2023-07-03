@@ -11,19 +11,21 @@ namespace TheWarTimeGame.Items
     {
         public int ID { get; set; }
         public double Price { get; set; }
-        public int Hunger { get; set; }
+        public double Hunger { get; set; }
 
         public Water(double price) 
         {
             this.Price = price;
         }
-        public void Use()
+        public void Use(ref double value)
         {
             foreach (var i in Player.GetPlayerInstance().Equipment)
             {
                 if (i.GetType() == typeof(Water))
                 {
+                    Player.GetPlayerInstance().Equipment.Remove(i);
                     Player.GetPlayerInstance().Hunger += 2;
+                    return;
                 }
             }
         }
@@ -33,5 +35,9 @@ namespace TheWarTimeGame.Items
             return "Water";
         }
 
+        public ITem GetClone()
+        {
+            return (Water)this.MemberwiseClone();
+        }
     }
 }

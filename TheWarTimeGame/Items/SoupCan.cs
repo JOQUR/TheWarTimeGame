@@ -11,13 +11,13 @@ namespace TheWarTimeGame.Items
     {
         public int ID { get; set; }
         public double Price { get; set; }
-        public int Hunger { get; set; }
+        public double Hunger { get; set; }
 
         public SoupCan(double price)
         {
             this.Price = price;
         }
-        public void Use()
+        public void Use(ref double value)
         {
             foreach(var i in Player.GetPlayerInstance().Equipment)
             {
@@ -25,6 +25,7 @@ namespace TheWarTimeGame.Items
                 {
                     Player.GetPlayerInstance().Equipment.Remove(i);
                     Player.GetPlayerInstance().Hunger += 4;
+                    return;
                 }
             }
         }
@@ -32,6 +33,11 @@ namespace TheWarTimeGame.Items
         public override string ToString()
         {
             return "SoupCan";
+        }
+
+        public ITem GetClone()
+        {
+            return (SoupCan)this.MemberwiseClone();
         }
     }
 }

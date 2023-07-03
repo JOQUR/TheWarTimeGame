@@ -44,13 +44,34 @@ namespace TheWarTimeGame.ConfigHandler
                     Print("Hunger: " + Player.GetPlayerInstance().Hunger, ConsoleColor.Green, true);
                     break;
                 case ConsoleKey.E:
-                {
+                    {
+                    Console.Clear();
                     Print("Item List Below: ", ConsoleColor.Green, true);
                     foreach(var i in Player.GetPlayerInstance().Equipment)
                     {
-                            Print(i.ToString()!, ConsoleColor.Green);
+                        Print(i.ToString()!, ConsoleColor.Green);
                     }
                     break;
+                }
+                case ConsoleKey.S:
+                    Print("SAVING GAME...", ConsoleColor.DarkBlue, true);
+                    //placeholder
+                    break;
+            }
+        }
+
+        public static string ChooseWeapon(ConsoleKeyInfo keyInfo)
+        {
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.P:
+                {
+                    return "Pistol";
+                }
+                default:
+                case ConsoleKey.K:
+                {
+                    return "Knife";
                 }
             }
         }

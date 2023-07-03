@@ -9,6 +9,6 @@ namespace TheWarTimeGame.Characters
     public interface IHuman
     {
         public double Health { get; set; }
-        public void Attack(ref Enemy enemy);
+        public void Attack(ref double health);
     }
 }

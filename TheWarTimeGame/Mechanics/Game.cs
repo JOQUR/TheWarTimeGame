@@ -1,5 +1,6 @@
 ﻿using TheWarTimeGame.Characters;
 using TheWarTimeGame.ConfigHandler;
+using TheWarTimeGame.Items;
 using TheWarTimeGame.Location;
 
 namespace TheWarTimeGame.Mechanics
@@ -15,19 +16,22 @@ namespace TheWarTimeGame.Mechanics
         private IExplore ExploreChurch, ExploreLib, StayHome;
         private int _days;
         private double _hp;
-        private int _hunger;
+        private double _hunger;
+        private IWeapon _choosenWeapon;
         public Game(Home home, Library library, Church church)
         {
             GameInit(home, library, church);
             do
             {
+                updateHomeShelfs();
                 _hp = Player.GetPlayerInstance().Health;
                 _hunger = Player.GetPlayerInstance().Hunger;
                 InformUser();
-                Explorer.Invoke(Action(_inputHandler.GetDecision()));
+                Explorer.Invoke(Action(_inputHandler.GetDecision()), _choosenWeapon);
                 _days++;
-                if(_hp <= 0 || _hunger <= 0)
+                if(Player.GetPlayerInstance().Health <= 0 || Player.GetPlayerInstance().Hunger <= 0)
                 {
+                    ConsoleManagment.Print("YOU LOST!", ConsoleColor.Red, true);
                     Environment.Exit(0);
                 }
             } while (_days < 30);
@@ -41,9 +45,10 @@ namespace TheWarTimeGame.Mechanics
             _church = (Church)church.GetClone();
             _player = Player.GetPlayerInstance();
             _inputHandler = new InputHandler();
-            ExploreChurch = new ExploreChurch();
+            ExploreChurch = new ExploreChurch((Church)church.GetClone());
             ExploreLib = new ExploreLibrary((Library)library.GetClone());
             StayHome = new StayHome(_home);
+            
         }
 
         private void InformUser()
@@ -55,8 +60,19 @@ namespace TheWarTimeGame.Mechanics
             ConsoleManagment.Print(MapParser.GetMap(), ConsoleColor.Gray);
         }
 
+        private void updateHomeShelfs()
+        {
+            for(int i = 0; i < _home.Loot.Count; i++)
+            {
+                Player.GetPlayerInstance().Equipment.Add(_home.Loot[i].Value);
+                _home.Loot.RemoveAt(i);
+            }
+        }
+
         private IExplore Action(int decision)
         {
+            
+            string choice = string.Empty;
             Console.Clear();
             switch (decision)
             {
@@ -69,12 +85,36 @@ namespace TheWarTimeGame.Mechanics
                 case 2:
                 {
                     ConsoleManagment.Print("You decided to explore library!", ConsoleColor.Yellow, true);
+                    setWeapon(choice);
                     return this.ExploreLib;
                 }
                 case 3:
                 {
                     ConsoleManagment.Print("You decided to explore church!", ConsoleColor.Yellow, true);
+                    setWeapon(choice);
                     return this.ExploreChurch;
+                }
+            }
+        }
+
+        private void setWeapon(string choice)
+        {
+            ConsoleManagment.Print("You need to choose weapon which you will use durign exploration. (p-pistol/k-knife)", ConsoleColor.Green);
+            _choosenWeapon = null;
+            while (_choosenWeapon == null)
+            {
+                choice = ConsoleManagment.ChooseWeapon(Console.ReadKey(true));
+                if (choice == "Knife")
+                {
+                    _choosenWeapon = (Knife)Player.GetPlayerInstance().Equipment.Find(x => x.ToString() == choice);
+                }
+                else if (choice == "Pistol")
+                {
+                    _choosenWeapon = (Pistol)Player.GetPlayerInstance().Equipment.Find(x => x.ToString() == choice);
+                }
+                if (null == _choosenWeapon)
+                {
+                    ConsoleManagment.Print("You don't have this item!", ConsoleColor.Red);
                 }
             }
         }

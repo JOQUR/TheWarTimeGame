@@ -12,9 +12,9 @@ namespace TheWarTimeGame.Characters
             _pistol = new Pistol(0, PistolPerks.Standard);
         }
 
-        public void Attack(ref Enemy enemy)
+        public void Attack(ref double health)
         {
-            _pistol.Attack(ref enemy);
+            _pistol.Attack(ref health);
         }
     }
 }
