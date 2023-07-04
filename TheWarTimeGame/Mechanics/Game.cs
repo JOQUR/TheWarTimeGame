@@ -35,6 +35,7 @@ namespace TheWarTimeGame.Mechanics
                     Environment.Exit(0);
                 }
             } while (_days < 30);
+            _ = new Finish();
         }
 
         public void GameInit(Home home, Library library, Church church)

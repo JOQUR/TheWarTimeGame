@@ -23,10 +23,8 @@ public class MainMenuHandler
 
     public void HandleDecision()
     {
-        string filename;
+        string filename = string.Empty;
         ConsoleManagment.Print(XMLparser.ReadScript("Invitation"), ConsoleColor.DarkBlue);
-        Console.WriteLine("Podaj nazwe pliku");
-        filename = Console.ReadLine();
         int decision = GetDecision();
         switch (decision)
         {
@@ -34,6 +32,8 @@ public class MainMenuHandler
                 _command = new NewGame();
                 break;
             case 2:
+                ConsoleManagment.Print("Podaj nazwe pliku", ConsoleColor.Magenta, true);
+                filename = Console.ReadLine();
                 _command = new LoadGame(filename);
                 break;
             case 3:
