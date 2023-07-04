@@ -19,6 +19,15 @@ namespace TheWarTimeGame.Menu
             _home = (Home)cHandler.GetConfig(_home);
         }
 
+
+        public void Execute(string filename)
+        {
+            cHandler = new HandleConfig();
+            _lib = (Library)cHandler.GetConfig(filename, _lib);
+            _church = (Church)cHandler.GetConfig(filename, _church);
+            _home = (Home)cHandler.GetConfig(filename, _home);
+        }
+
         public NewGame()
         {
             InitLocations();

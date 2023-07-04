@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TheWarTimeGame.Characters;
+using TheWarTimeGame.Location;
 
 namespace TheWarTimeGame.ConfigHandler
 {
@@ -53,9 +54,32 @@ namespace TheWarTimeGame.ConfigHandler
                     }
                     break;
                 }
+            }
+        }
+
+        public static void GetStats(ConsoleKeyInfo keyInfo, Home home, Library library, Church church)
+        {
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.H:
+                    Print("HP: " + Player.GetPlayerInstance().Health, ConsoleColor.Green, true);
+                    break;
+                case ConsoleKey.J:
+                    Print("Hunger: " + Player.GetPlayerInstance().Hunger, ConsoleColor.Green, true);
+                    break;
+                case ConsoleKey.E:
+                    {
+                        Console.Clear();
+                        Print("Item List Below: ", ConsoleColor.Green, true);
+                        foreach (var i in Player.GetPlayerInstance().Equipment)
+                        {
+                            Print(i.ToString()!, ConsoleColor.Green);
+                        }
+                        break;
+                    }
                 case ConsoleKey.S:
                     Print("SAVING GAME...", ConsoleColor.DarkBlue, true);
-                    //placeholder
+                    XMLparser.SaveGame(home, library, church);
                     break;
             }
         }

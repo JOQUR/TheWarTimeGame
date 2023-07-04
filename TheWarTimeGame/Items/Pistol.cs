@@ -13,10 +13,9 @@ public class Pistol : IWeapon
         this.Perk = perk;
         this.Price = price;
     }
-    public Pistol(double price)
+    public Pistol(PistolPerks standard)
     {
         this.Perk = PistolPerks.Standard;
-        this.Price = price;
     }
     public void Attack(ref double health)
     {

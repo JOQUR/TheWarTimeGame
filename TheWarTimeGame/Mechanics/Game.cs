@@ -55,7 +55,7 @@ namespace TheWarTimeGame.Mechanics
         {
             Console.Clear();
             ConsoleManagment.Print(XMLparser.ReadScript("Instruction"), ConsoleColor.Magenta);
-            ConsoleManagment.GetStats(Console.ReadKey());
+            ConsoleManagment.GetStats(Console.ReadKey(), (Home)_home.GetClone(), (Library)_library.GetClone(), (Church)_church.GetClone());
             ConsoleManagment.Print(XMLparser.ReadScript("NewGame"), ConsoleColor.White);
             ConsoleManagment.Print(MapParser.GetMap(), ConsoleColor.Gray);
         }

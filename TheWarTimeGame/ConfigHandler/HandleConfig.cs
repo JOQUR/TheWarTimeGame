@@ -25,5 +25,23 @@ namespace TheWarTimeGame.ConfigHandler
             _ = new XMLparser(church);
             return church;
         }
+
+        public ILocation GetConfig(string filename, Home home)
+        {
+            home = new Home();
+            _ = new XMLparser(filename, home);
+            return home;
+        }
+        public ILocation GetConfig(string filename, Library library)
+        {
+            _ = new XMLparser(filename, library);
+            return library;
+        }
+        public ILocation GetConfig(string filename, Church church)
+        {
+            church = new Church();
+            _ = new XMLparser(filename, church);
+            return church;
+        }
     }
 }

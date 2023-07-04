@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TheWarTime>
+  <Locations>
+    <Home>
+      <Items />
+    </Home>
+    <Library>
+      <Items>
+        <Item price="2" id="0" name="Pistol" />
+        <Item price="2" id="0" name="Water" />
+        <Item price="2" id="0" name="Water" />
+        <Item price="2" id="0" name="Water" />
+      </Items>
+      <Enemies>
+        <Enemy hp="5" />
+        <Enemy hp="7" />
+      </Enemies>
+    </Library>
+    <Church>
+      <Items>
+        <Item price="2" id="0" name="Water" />
+        <Item price="2" id="0" name="SoupCan" />
+        <Item price="2" id="0" name="Water" />
+        <Item price="2" id="0" name="Water" />
+        <Item price="2" id="0" name="SoupCan" />
+      </Items>
+      <Enemies>
+        <Enemy hp="8" />
+        <Enemy hp="10" />
+        <Enemy hp="9" />
+      </Enemies>
+    </Church>
+  </Locations>
+  <Vendors />
+</TheWarTime>

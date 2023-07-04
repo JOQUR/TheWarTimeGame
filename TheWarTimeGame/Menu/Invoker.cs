@@ -9,4 +9,10 @@ public class Invoker
     {
         command.Execute();
     }
+
+    public static void Invoke(ICommand command, string filename)
+    {
+        command.Execute(filename);
+    }
+
 }

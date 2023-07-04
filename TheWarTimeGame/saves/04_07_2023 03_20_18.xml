@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TheWarTime>
+  <Locations>
+    <Home>
+      <Items>
+        <Item Price="2" id="0" name="Knife" />
+        <Item Price="2" id="0" name="Knife" />
+        <Item Price="2" id="0" name="Knife" />
+        <Item Price="2" id="0" name="Knife" />
+      </Items>
+    </Home>
+    <Library>
+      <Items>
+        <Item Price="2" id="0" name="Pistol" />
+        <Item Price="2" id="0" name="Pistol" />
+        <Item Price="2" id="0" name="Pistol" />
+        <Item Price="2" id="0" name="Pistol" />
+      </Items>
+    </Library>
+    <Church>
+      <Items>
+        <Item Price="2" id="0" name="Knife" />
+        <Item Price="2" id="0" name="Knife" />
+        <Item Price="2" id="0" name="Knife" />
+        <Item Price="2" id="0" name="Knife" />
+      </Items>
+    </Church>
+  </Locations>
+  <Vendors />
+</TheWarTime>

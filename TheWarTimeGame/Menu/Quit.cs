@@ -6,4 +6,8 @@ public class Quit : ICommand
     {
         Environment.Exit(0);
     }
+    public void Execute(string filename)
+    {
+        Environment.Exit(0);
+    }
 }

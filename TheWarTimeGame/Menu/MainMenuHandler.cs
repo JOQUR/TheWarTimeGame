@@ -23,7 +23,10 @@ public class MainMenuHandler
 
     public void HandleDecision()
     {
+        string filename;
         ConsoleManagment.Print(XMLparser.ReadScript("Invitation"), ConsoleColor.DarkBlue);
+        Console.WriteLine("Podaj nazwe pliku");
+        filename = Console.ReadLine();
         int decision = GetDecision();
         switch (decision)
         {
@@ -31,7 +34,7 @@ public class MainMenuHandler
                 _command = new NewGame();
                 break;
             case 2:
-                _command = new LoadGame();
+                _command = new LoadGame(filename);
                 break;
             case 3:
                 _command = new Quit();
@@ -42,7 +45,14 @@ public class MainMenuHandler
                 break;
         }
 
-        Invoker.Invoke(_command);
+        if(filename != string.Empty)
+        {
+            Invoker.Invoke(_command, filename);
+        }
+        else
+        {
+            Invoker.Invoke(_command);
+        }
     }
     private int GetDecision()
     {
