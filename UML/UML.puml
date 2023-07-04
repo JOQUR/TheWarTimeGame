@@ -1,0 +1,130 @@
+@startuml
+
+namespace TheWarTimeGame{
+    class Program{
+        {static} Main(args : string[]) : void
+    }
+}
+
+namespace TheWarTimeGame.Menu{
+    interface ICommand{
+        {abstract}Execute() : void
+        {abstract}Execute(filename : string) : void
+    }
+    class Invoker{
+        # Invoker()
+        + {static} Invoke(command : ICommand) : void
+        + {static} Invoke(command : ICommand, filename: string) : void
+    }
+    class LoadGame{
+        - _lib : Library
+        - _home : Home
+        - _church: Church
+        - cHandler: HandleConfig
+        - game : Game
+
+        + LoadGame(filename: string)
+        - InitLocations() : void
+    }
+    class MainMenuHandler{
+        - _command: ICommand
+        + MainMenuHandler()
+        +HandleDecision(): void
+        - GetDecision(): int
+    }
+    class NewGame{
+        - _lib : Library
+        - _home : Home
+        - _church: Church
+        - cHandler: HandleConfig
+        - game : Game
+        + NewGame()
+        - InitLocations() : void
+    }
+    class Quit{}
+
+    ICommand <|.. LoadGame
+    ICommand <|.. NewGame
+    ICommand <|.. Quit
+}
+
+namespace TheWarTimeGame.Mechanics{
+    class ExploreChurch{
+        - _seenByEnemies : BoundaryFontColor
+        - _rnd : Random
+        - _church : Church
+        - fight : FIght
+        - _weapon : IWeapon
+
+        +ExploreChurch(church: Church)
+        -seenByEnemies(): void
+        -loot(): void
+    }
+    class ExploreLibrary{
+        - _seenByEnemies : BoundaryFontColor
+        - _rnd : Random
+        - _church : Church
+        - fight : FIght
+        - _weapon : IWeapon
+
+        +ExploreLibrary(lib: Library)
+        -seenByEnemies(): void
+        -loot(): void
+    }
+    class Explorer{
+        - Explorer()
+        + {static} Invoke(comand: IExplore, weapon: IWeapon)
+    }
+    class Fight{
+        - _player: PLayer
+        - _location: ILocation
+        - enemy: Enemy
+        +Fight(location: ILocation)
+
+        -battle(): void
+        -showBattleStats(): void
+    }
+    class Finish{
+        + Finish()
+    }
+    class Game{
+        - _home: Home
+        - _library: Library
+        - _church: Church
+        -Player: PLayer
+        -inputHandler: InputHandler
+        -ExploreChurch: IExplore
+        -ExploreLibrary: IExplore
+        -StayHome: IExplore
+        - _days: int
+        - _hp: double
+        - _hunger: double
+        - _chooseWeapon: IWeapon
+        + Game(home: Home, lib: Library, church: Church)
+        +GameInit(home: Home, lib: Library, church: Church) : void
+        + InformUser(): void
+        - updateHomeShelfs(): void
+        -Action(decision: int): IExplore
+        -setWeapon(choice: string): void
+    }
+    interface IExplore{
+        +Explore(weapon: IWeapon)
+    }
+    class InputHandler{
+        + GetDecision(): int
+    }
+    class QuickTimeEvent{
+        +HomeEvent(): void
+        +clickButtons(input: ref string)
+    }
+    class StayHome{
+        +StayHome(home:Home)
+        - useItem(list: List<Item>): void
+        - SpecialEvent(): void
+        - readKey(key: ConsoleKeyInfo): bool
+    }
+    IExplore <|.. ExploreChurch
+    IExplore <|.. ExploreLibrary
+    IExplore <|.. StayHome
+}
+@enduml
